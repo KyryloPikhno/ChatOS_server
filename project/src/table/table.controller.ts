@@ -20,20 +20,15 @@ export class TableController {
   constructor(private readonly tableService: TableService) {}
 
   @Get()
-  async findAll(@Query('company') company: string): Promise<Table[]> {
+  async findAll(@Query('name') name: string): Promise<Table[]> {
     return this.tableService.findAll({
-      companyName: new RegExp(company),
+      name: new RegExp(name),
     });
   }
 
   @Post()
   create(@Body() createTableDto: CreateTableDto): Promise<Table> {
     return this.tableService.create(createTableDto);
-  }
-
-  @Get(':id')
-  async findById(@Param('id') id: string): Promise<Table> {
-    return this.tableService.findById(id);
   }
 
   @Put(':id')

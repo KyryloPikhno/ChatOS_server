@@ -8,28 +8,13 @@ export type TableDocument = HydratedDocument<Table>;
 })
 export class Table {
   @Prop({ required: true })
-  companyName: string;
+  name: string;
 
   @Prop({ required: true })
-  gameName: string;
+  email: string;
 
   @Prop({ required: true })
-  totalPrice: number;
-
-  @Prop({ default: false })
-  status: boolean;
-
-  @Prop({ required: true })
-  currency: string;
-
-  @Prop({ type: Date })
-  createdAt: Date;
-
-  @Prop({ type: Date })
-  updatedAt: Date;
-
-  @Prop({ required: true })
-  confirm: boolean;
+  age: number;
 }
 
 export const TableSchema = SchemaFactory.createForClass(Table);

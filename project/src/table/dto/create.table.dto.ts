@@ -1,9 +1,8 @@
 import {
-  IsBoolean,
+  IsEmail,
   IsNotEmpty,
   IsNumber,
   IsString,
-  Matches,
   Max,
   MaxLength,
   Min,
@@ -13,59 +12,30 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTableDto {
   @ApiProperty({
-    example: 'Company 123',
+    example: 'Kirill',
     required: true,
   })
   @IsString()
   @MinLength(2)
   @MaxLength(20)
-  companyName: string;
+  name: string;
 
   @ApiProperty({
-    example: 'GTA',
+    example: 'mr.admin@i.ua',
     required: true,
   })
   @IsString()
   @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(20)
-  @Matches(/^[a-zA-Z0-9]+ ?([a-zA-Z0-9]+$){0,20}$/, {
-    message: "The game name didn't match with RegExp :(",
-  })
-  gameName: string;
+  @IsEmail()
+  email: string;
 
   @ApiProperty({
-    example: 100,
+    example: 18,
     required: true,
   })
   @IsNumber()
   @IsNotEmpty()
   @Min(1)
-  @Max(10000)
-  totalPrice: number;
-
-  @ApiProperty({
-    example: '$',
-    required: true,
-  })
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(1)
-  @MaxLength(5)
-  currency: string;
-
-  @ApiProperty({
-    example: false,
-    required: false,
-  })
-  @IsBoolean()
-  status: boolean;
-
-  @ApiProperty({
-    example: false,
-    required: true,
-  })
-  @IsBoolean()
-  @IsNotEmpty()
-  confirm: boolean;
+  @Max(100)
+  age: number;
 }
