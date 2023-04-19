@@ -20,11 +20,18 @@ export class TableController {
   constructor(private readonly tableService: TableService) {}
 
   @Get()
-  async findAll(@Query('name') name: string): Promise<Table[]> {
-    return this.tableService.findAll({
-      name: new RegExp(name),
-    });
+  async findAll(@Query('name') name: string, @Query('sort') sort: string): Promise<Table[]> {
+    let sortQuery = {};
+
+    if (sort === 'desc') {
+      sortQuery = {name: -1};
+    } else {
+      sortQuery = {name: 1};
+    }
+
+    return this.tableService.findAll(name, sortQuery);
   }
+
 
   @Post()
   create(@Body() createTableDto: CreateTableDto): Promise<Table> {

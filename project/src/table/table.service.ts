@@ -15,8 +15,8 @@ export class TableService {
     private readonly tableModel: Model<TableDocument>,
   ) {}
 
-  async findAll(name): Promise<Table[]> {
-    return await this.tableModel.find(name).exec();
+  async findAll(name, sortQuery): Promise<Table[]> {
+    return await this.tableModel.find({name: {$regex: new RegExp(name, 'i')}}).sort(sortQuery).exec();
   }
 
   async create(createTableDto: CreateTableDto): Promise<Table> {
