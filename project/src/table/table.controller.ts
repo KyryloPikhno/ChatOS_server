@@ -21,7 +21,7 @@ export class TableController {
 
   @Get()
   async findAll(@Query('name') name: string, @Query('sort') sort: string): Promise<Table[]> {
-    let sortQuery = {};
+    let sortQuery;
 
     if (sort === 'desc') {
       sortQuery = {name: -1};
@@ -31,7 +31,6 @@ export class TableController {
 
     return this.tableService.findAll(name, sortQuery);
   }
-
 
   @Post()
   create(@Body() createTableDto: CreateTableDto): Promise<Table> {
