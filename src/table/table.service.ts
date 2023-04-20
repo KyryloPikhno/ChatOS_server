@@ -15,7 +15,15 @@ export class TableService {
     private readonly tableModel: Model<TableDocument>,
   ) {}
 
-  async findAll(name, sortQuery): Promise<Table[]> {
+  async findAll(name, sort): Promise<Table[]> {
+    let sortQuery;
+
+    if (sort === 'desc') {
+      sortQuery = {'createdAt': -1};
+    } else {
+      sortQuery = {'createdAt': 1};
+    }
+
     return await this.tableModel.find({name: {$regex: new RegExp(name, 'i')}}).sort(sortQuery).exec();
   }
 
